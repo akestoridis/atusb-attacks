@@ -75,6 +75,10 @@ endif
 ATTACKID = 00
 OBJS += attack_$(ATTACKID).o
 
+ifdef PANID
+CFLAGS += -DPANID=$(PANID)
+endif
+
 
 vpath %.c usb/ attacks/
 
