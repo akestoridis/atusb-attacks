@@ -1,0 +1,25 @@
+workflow:
+
+- connect zprobe (note: it currently inverts because it didn't have any
+  other chips around. this may change later.)
+
+- capture the USB signals at an interesting moment with a sample rate of
+  50 MSa/s
+
+- zoom into the frame(s) of interest
+
+- download the data with
+  ./get.py
+
+- decode with
+  ./dec.py
+
+  For manual decoding, set the coders to D+ and D- (we need D- for SE0
+  and SE1 detection), then click on a rising clock edge left of the
+  packet and move the cursor to the right.
+
+- if there are problems with the clock, the analog signal and digital
+  signals derived from it can be examined after running dec.py with
+  ./plot
+
+  (Note that the digital zprobe hides any analog anomalies.)

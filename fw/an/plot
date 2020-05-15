@@ -1,0 +1,12 @@
+#!/bin/sh
+#
+# Plot output of "dec"
+#
+gnuplot -persist <<EOF
+set style data lines
+plot "_wv" using 1:(\$2-4), \
+  "_dig" using 1:(\$2*3.3-4) lw 2, \
+  "_wv" using 1:3, \
+  "_dig" using 1:(\$3*3.3) lw 2, \
+  "_clk" using 1:(\$2+1) lt 7
+EOF
