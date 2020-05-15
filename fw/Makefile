@@ -4,6 +4,9 @@
 # Written 2010-2011, 2013 by Werner Almesberger
 # Copyright 2010-2011, 2013 by Werner Almesberger
 #
+# Modified 2020 by Dimitrios-Georgios Akestoridis
+# Copyright 2020 Dimitrios-Georgios Akestoridis
+#
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation; either version 2 of the License, or
@@ -69,10 +72,13 @@ OBJS += board_atusb.o
 BOOT_OBJS += board_atusb.o
 endif
 
+ATTACKID = 00
+OBJS += attack_$(ATTACKID).o
 
-vpath %.c usb/
 
-CFLAGS += -Iinclude -Iusb -I.
+vpath %.c usb/ attacks/
+
+CFLAGS += -Iinclude -Iusb -Iattacks -I.
 
 # ----- Verbosity control -----------------------------------------------------
 
@@ -96,10 +102,10 @@ endif
 
 # ----- Rules -----------------------------------------------------------------
 
-.PHONY:		all clean upload prog dfu update version.c bindist
+.PHONY:		all clean upload prog dfu update version.c bindist disclaimer
 .PHONY:		prog-app prog-read on off reset
 
-all:		$(NAME).bin boot.hex
+all:		disclaimer $(NAME).bin boot.hex
 
 $(NAME).elf:	$(OBJS)
 		$(MAKE) version.o
@@ -217,7 +223,7 @@ prog-read:
 		ssh $(HOST) avrdude -F -p $(CHIP) -c nanonote_atusb \
 		  -U flash:r:mcu.bin:r
 
-dfu:		$(NAME).dfu
+dfu:		disclaimer $(NAME).dfu
 		dfu-util -d $(USB_ID) -D $(NAME).dfu
 
 update:		$(NAME).bin
@@ -234,3 +240,20 @@ off:
 reset:
 		ssh $(HOST) poke 0x10010318 2048
 		ssh $(HOST) poke 0x10010314 2048
+
+disclaimer:
+		@echo "######################################################"
+		@echo "#                     DISCLAIMER                     #"
+		@echo "#                                                    #"
+		@echo "# This repository contains implementations of        #"
+		@echo "# proof-of-concept attacks against Zigbee networks   #"
+		@echo "# and other IEEE 802.15.4-based networks, which are  #"
+		@echo "# made available for benign research purposes only.  #"
+		@echo "# The users of these implementations are responsible #"
+		@echo "# for making sure that they are compliant with their #"
+		@echo "# local laws and that they have proper permission    #"
+		@echo "# from the affected network owners.                  #"
+		@echo "######################################################"
+		@echo -n "Are you sure that you want to proceed? [y/N] " \
+		  && read answer && [ $${answer:-N} = "y" ]
+		@echo "You accepted responsibility for your actions"

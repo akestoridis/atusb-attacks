@@ -4,6 +4,9 @@
  * Written 2011, 2013 by Werner Almesberger
  * Copyright 2011, 2013 Werner Almesberger
  *
+ * Modified 2020 by Dimitrios-Georgios Akestoridis
+ * Copyright 2020 Dimitrios-Georgios Akestoridis
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -19,6 +22,7 @@
 #include "at86rf230.h"
 #include "spi.h"
 #include "board.h"
+#include "attack.h"
 #include "mac.h"
 
 #define	RX_BUFS	3
@@ -119,6 +123,10 @@ static bool handle_irq(void)
 	uint8_t irq;
 
 	irq = reg_read(REG_IRQ_STATUS);
+	if (irq == IRQ_RX_START)
+		if (attack())
+			return 1;
+
 	if (!(irq & IRQ_TRX_END))
 		return 1;
 
