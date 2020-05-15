@@ -79,6 +79,10 @@ ifdef PANID
 CFLAGS += -DPANID=$(PANID)
 endif
 
+ifdef EPID
+CFLAGS += -DEPID=$(EPID)
+endif
+
 
 vpath %.c usb/ attacks/
 
