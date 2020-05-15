@@ -145,7 +145,8 @@ clean:
 		rm -f $(OBJS) $(OBJS:.o=.d)
 		rm -f boot.hex boot.elf
 		rm -f $(BOOT_OBJS) $(BOOT_OBJS:.o=.d)
-		rm -f version.c version.d version.o
+		rm -f version.c version.d version.o .version
+		rm -f attack_*.o attack_*.d
 
 # ----- Build version ---------------------------------------------------------
 
