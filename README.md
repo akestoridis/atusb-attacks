@@ -9,6 +9,21 @@ This repository contains implementations of proof-of-concept attacks against Zig
 The users of these implementations are responsible for making sure that they are compliant with their local laws and that they have proper permission from the affected network owners.
 
 
+## Implemented Attacks
+
+| Attack ID | Attack Description                                                                                                                 | Required Macro |
+| --------- | -----------------------------------------------------------------------------------------------------------------------------------| -------------- |
+| 00        | Do not jam or spoof any packets; equivalent to the original firmware                                                               |                |
+| 01        | Jam only Network Update commands                                                                                                   |                |
+| 02        | Spoof a MAC acknowledgment for each 12-byte Data Request of a specified network                                                    | PANID          |
+| 03        | Jam only packets of a specified network that request a MAC acknowledgment                                                          | PANID          |
+| 04        | Jam only packets of a specified network that request a MAC acknowledgment and then spoof a MAC acknowledgment                      | PANID          |
+| 05        | Jam only Rejoin Responses of a specified network                                                                                   | PANID          |
+| 06        | Jam only Rejoin Responses and Network Update commands                                                                              |                |
+| 07        | Jam only 28-byte beacons, whose EPID matches with the 32 least-significant bits of the specified EPID                              | EPID           |
+| 08        | Jam only 28-byte beacons, whose EPID matches with the 32 least-significant bits of the specified EPID, and Network Update commands | EPID           |
+
+
 ## License
 
 Copyright 2007 S. Salewski\
