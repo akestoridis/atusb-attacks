@@ -81,23 +81,22 @@ $ sudo make install
 ```
 $ cd
 $ git clone https://github.com/akestoridis/atusb-attacks.git
-$ cd atusb-attacks/fw/
+$ cd atusb-attacks/
+$ cd fw/
 ```
 
-* To compile and flash the firmware image that launches the attack with ID 01, execute the following command:
+* Execute the following commands to compile and flash the firmware image that launches the attack with ID 01, which will print a disclaimer and the user will have to accept responsibility for their actions if they want to proceed:
 ```
 $ make clean
 $ sudo make dfu ATTACKID=01
 ```
 
-* The previous command will print a disclaimer and the user will have to accept responsibility for their actions if they want to proceed.
-
-* After compiling and flashing the firmware image, executing the following command should display the ATUSB as an IEEE 802.15.4 interface and its configuration, including its phyname (e.g., `phy1`) and its devname (e.g. `wpan0`).
+* After compiling and flashing the firmware image, executing the following command should display the configuration of the ATUSB as an IEEE 802.15.4 interface, including its phyname (e.g., `phy1`) and its devname (e.g. `wpan0`).
 ```
 $ iwpan dev
 ```
 
-* To launch the attack of the flashed firmware image, create a new interface in monitor mode and enable it on the appropriate channel (e.g., channel 20 on page 0) with the following commands:
+* To launch the attack of the flashed firmware image, create a new interface (e.g., `attack0`) in monitor mode and enable it on the appropriate channel (e.g., channel 20 on page 0) with the following commands:
 ```
 $ sudo iwpan dev wpan0 del
 $ sudo iwpan phy phy1 interface add attack0 type monitor
@@ -105,24 +104,24 @@ $ sudo iwpan phy phy1 set channel 0 20
 $ sudo ip link set attack0 up
 ```
 
-* To stop the attack, execute the following command:
+* To stop the attack, disable the new interface as follows:
 ```
 $ sudo ip link set attack0 down
 ```
 
-* Alternatively, to compile and flash the firmware image that launches the attack with ID 05 against the network with PANID 0x99aa, execute the following command:
+* Alternatively, to compile and flash the firmware image that launches the attack with ID 05 against the network with PANID 0x99aa, execute the following commands:
 ```
 $ make clean
 $ sudo make dfu ATTACKID=05 PANID=0x99aa
 ```
 
-* Similarly, to compile and flash the firmware image that launches the attack with ID 07 against the network with EPID 0xfacefeedbeefcafe, execute the following command:
+* Similarly, to compile and flash the firmware image that launches the attack with ID 07 against the network with EPID 0xfacefeedbeefcafe, execute the following commands:
 ```
 $ make clean
 $ sudo make dfu ATTACKID=07 EPID=0xfacefeedbeefcafe
 ```
 
-* To only compile the firmware image that launches the attack with ID 01, execute the following command:
+* To only compile the firmware image that launches the attack with ID 01, execute the following commands:
 ```
 $ make clean
 $ make ATTACKID=01
