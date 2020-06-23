@@ -22,6 +22,7 @@ The users of these implementations are responsible for making sure that they are
 | 06        | Jam only Rejoin Responses and Network Update commands                                                                              |                |
 | 07        | Jam only 28-byte beacons, whose EPID matches with the 32 least-significant bits of the specified EPID                              | EPID           |
 | 08        | Jam only 28-byte beacons, whose EPID matches with the 32 least-significant bits of the specified EPID, and Network Update commands | EPID           |
+| 09        | Jam only Rejoin Responses and Network Update commands with a MAC acknowledgment being spoofed for each jammed Rejoin Response      |                |
 
 
 ## Instructions
