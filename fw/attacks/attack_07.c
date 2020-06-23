@@ -38,7 +38,7 @@ bool attack(void)
 	if (spi_recv() != 28) {
 		/*
 		 * Ignore packets whose length does not match
-		 * the typical length of MAC Beacon packets
+		 * the typical length of beacons
 		 */
 		spi_end();
 		return 1;

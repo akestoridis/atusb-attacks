@@ -39,7 +39,7 @@ bool attack(void)
 	/* Check the length of the received packet */
 	phy_len = spi_recv();
 	if ((phy_len < 5) || (phy_len & 0x80)) {
-		/* Ignore packets with invalid PHY Length */
+		/* Ignore packets with invalid length */
 		spi_end();
 		return 1;
 	}

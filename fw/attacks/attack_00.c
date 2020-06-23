@@ -15,7 +15,7 @@
 #include "attack.h"
 
 
-/* Do not jam or spoof any packets; equivalent to the original firmware */
+/* Ignore RX_START interrupts; equivalent to the original ATUSB firmware */
 bool attack(void)
 {
 	return 0;

