@@ -93,7 +93,7 @@ $ make clean
 $ sudo make dfu ATTACKID=01
 ```
 
-* After compiling and flashing the firmware image, executing the following command should display the configuration of the ATUSB as an IEEE 802.15.4 interface, including its phyname (e.g., `phy1`) and its devname (e.g. `wpan0`).
+* After compiling and flashing the firmware image, executing the following command should display the configuration of the ATUSB as an IEEE 802.15.4 interface, including its phyname (e.g., `phy1`) and its devname (e.g., `wpan0`).
 ```
 $ iwpan dev
 ```
@@ -111,7 +111,7 @@ $ sudo ip link set attack0 up
 $ sudo ip link set attack0 down
 ```
 
-* Alternatively, to compile and flash the firmware image that launches the attack with ID 05 against the network with PANID 0x99aa, execute the following commands:
+* Alternatively, to compile and flash the firmware image that launches the attack with ID 05 against the network with PAN ID 0x99aa, execute the following commands:
 ```
 $ make clean
 $ sudo make dfu ATTACKID=05 PANID=0x99aa
@@ -132,6 +132,13 @@ $ make ATTACKID=01
 * The attack with ID 00 is equivalent to the original ATUSB firmware, which can be used to sniff IEEE 802.15.4 packets with the same sequence of commands as the other attacks and `tcpdump` to store them in a PCAP file.
 
 * Whenever the user executes a compilation or flashing command, a disclaimer will be printed and they will have to accept responsibility for their actions in order to proceed.
+
+
+## Publication
+
+Some of these attacks were used in the following publication:
+
+* D.-G. Akestoridis, M. Harishankar, M. Weber, and P. Tague, "Zigator: Analyzing the security of Zigbee-enabled smart homes," 2020, to appear in the Proceedings of the 13th ACM Conference on Security and Privacy in Wireless and Mobile Networks (WiSec).
 
 
 ## License
