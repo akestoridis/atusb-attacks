@@ -4,8 +4,8 @@
 # Written 2010-2011, 2013 by Werner Almesberger
 # Copyright 2010-2011, 2013 by Werner Almesberger
 #
-# Modified 2020 by Dimitrios-Georgios Akestoridis
-# Copyright 2020 Dimitrios-Georgios Akestoridis
+# Modified 2020-2021 by Dimitrios-Georgios Akestoridis
+# Copyright 2020-2021 Dimitrios-Georgios Akestoridis
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -81,6 +81,34 @@ endif
 
 ifdef EPID
 CFLAGS += -DEPID=$(EPID)
+endif
+
+ifdef SHORTDSTADDR
+CFLAGS += -DSHORTDSTADDR=$(SHORTDSTADDR)
+endif
+
+ifdef SHORTSRCADDR
+CFLAGS += -DSHORTSRCADDR=$(SHORTSRCADDR)
+endif
+
+ifdef FRAMECOUNTER
+CFLAGS += -DFRAMECOUNTER=$(FRAMECOUNTER)
+endif
+
+ifdef EXTENDEDSRCADDR
+CFLAGS += -DEXTENDEDSRCADDR=$(EXTENDEDSRCADDR)
+endif
+
+ifdef KEYSEQNUM
+CFLAGS += -DKEYSEQNUM=$(KEYSEQNUM)
+endif
+
+ifdef ACTIVESEC
+CFLAGS += -DACTIVESEC=$(ACTIVESEC)
+endif
+
+ifdef IDLESEC
+CFLAGS += -DIDLESEC=$(IDLESEC)
 endif
 
 

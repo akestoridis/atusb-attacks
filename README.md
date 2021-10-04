@@ -11,22 +11,22 @@ The users of these implementations are responsible for making sure that they are
 
 ## Implemented Attacks
 
-| Attack ID | Attack Description                                                                                                                 | Required Macro |
-| --------- | -----------------------------------------------------------------------------------------------------------------------------------| -------------- |
-| 00        | Ignore RX\_START interrupts; equivalent to the original ATUSB firmware                                                             |                |
-| 01        | Jam only Network Update commands                                                                                                   |                |
-| 02        | Spoof a MAC acknowledgment for each 12-byte Data Request of a specified network                                                    | PANID          |
-| 03        | Jam only packets of a specified network that request a MAC acknowledgment                                                          | PANID          |
-| 04        | Jam only packets of a specified network that request a MAC acknowledgment and then spoof a MAC acknowledgment                      | PANID          |
-| 05        | Jam only Rejoin Responses of a specified network                                                                                   | PANID          |
-| 06        | Jam only Rejoin Responses and Network Update commands                                                                              |                |
-| 07        | Jam only 28-byte beacons, whose EPID matches with the 32 least-significant bits of the specified EPID                              | EPID           |
-| 08        | Jam only 28-byte beacons, whose EPID matches with the 32 least-significant bits of the specified EPID, and Network Update commands | EPID           |
-| 09        | Jam only Rejoin Responses and Network Update commands with a MAC acknowledgment being spoofed for each jammed Rejoin Response      |                |
-| 10        | Jam only Network Update commands and spoof a MAC acknowledgment for each 12-byte Data Request of a specified network               | PANID          |
-| 11        | RESERVED                                                                                                                           |                |
-| 12        | RESERVED                                                                                                                           |                |
-| 13        | RESERVED                                                                                                                           |                |
+| Attack ID | Attack Description | Required Macros |
+| --------- | ------------------ | --------------- |
+| 00 | Ignore RX\_START interrupts; equivalent to the original ATUSB firmware |  |
+| 01 | Jam only Network Update commands |  |
+| 02 | Spoof a MAC acknowledgment for each 12-byte Data Request of a specified network | PANID |
+| 03 | Jam only packets of a specified network that request a MAC acknowledgment | PANID |
+| 04 | Jam only packets of a specified network that request a MAC acknowledgment and then spoof a MAC acknowledgment | PANID |
+| 05 | Jam only Rejoin Responses of a specified network | PANID |
+| 06 | Jam only Rejoin Responses and Network Update commands |  |
+| 07 | Jam only 28-byte beacons, whose EPID matches with the 32 least-significant bits of the specified EPID | EPID |
+| 08 | Jam only 28-byte beacons, whose EPID matches with the 32 least-significant bits of the specified EPID, and Network Update commands | EPID |
+| 09 | Jam only Rejoin Responses and Network Update commands with a MAC acknowledgment being spoofed for each jammed Rejoin Response |  |
+| 10 | Jam only Network Update commands and spoof a MAC acknowledgment for each 12-byte Data Request of a specified network | PANID |
+| 11 | Jam only 12-byte MAC commands of a specified network that request a MAC acknowledgment | PANID |
+| 12 | Jam only 12-byte MAC commands of a specified network that request a MAC acknowledgment and then spoof a MAC acknowledgment followed by a 127-byte NWK Data packet | PANID, SHORTDSTADDR, SHORTSRCADDR, FRAMECOUNTER, EXTENDEDSRCADDR, KEYSEQNUM |
+| 13 | Jam only certain 12-byte MAC commands of a specified network that request a MAC acknowledgment and then spoof a MAC acknowledgment followed by a 127-byte NWK Data packet, according to specified active and idle time intervals, with the active period restarting whenever a period of inactivity is observed and the idle period restarting whenever certain packet types are observed | PANID, SHORTDSTADDR, SHORTSRCADDR, FRAMECOUNTER, EXTENDEDSRCADDR, KEYSEQNUM, ACTIVESEC, IDLESEC |
 
 
 ## Instructions
@@ -151,7 +151,7 @@ Copyright 2007 S. Salewski\
 Copyright 2008-2011, 2013-2015 Werner Almesberger\
 Copyright 2015-2016 Stefan Schmidt\
 Copyright 2017 Josef Filzmaier\
-Copyright 2020 Dimitrios-Georgios Akestoridis
+Copyright 2020-2021 Dimitrios-Georgios Akestoridis
 
 This repository includes modified source code from the [ben-wpan repository](http://projects.qi-hardware.com/index.php/p/ben-wpan/).
 More specifically, the initial commit of this repository includes a copy of the [atusb/fw folder](http://projects.qi-hardware.com/index.php/p/ben-wpan/source/tree/805db6ebf5d80692158acadf88e239da9d3e67af/atusb/fw) from commit 805db6ebf5d80692158acadf88e239da9d3e67af of the ben-wpan repository.
