@@ -1,8 +1,8 @@
 /*
  * fw/attacks/attack_09.c - Attack function with ID 09
  *
- * Written 2020 by Dimitrios-Georgios Akestoridis
- * Copyright 2020 Dimitrios-Georgios Akestoridis
+ * Written 2020-2021 by Dimitrios-Georgios Akestoridis
+ * Copyright 2020-2021 Dimitrios-Georgios Akestoridis
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -55,7 +55,7 @@ bool attack(void)
 	/* Check the 8 least-significant bits of the MAC Frame Control */
 	_delay_us(32);
 	rx_byte = spi_recv();
-	if ((rx_byte & 0x03) != 0x01) {
+	if ((rx_byte & 0x07) != 0x01) {
 		/* Ignore packets that are not MAC Data packets */
 		spi_end();
 		return 1;
