@@ -5,14 +5,14 @@ Modified ATUSB firmware that supports selective jamming and spoofing attacks
 
 ## Disclaimer
 
-This repository contains implementations of proof-of-concept attacks against Zigbee networks and other IEEE 802.15.4-based networks, which are made available for benign research purposes only.
+This repository contains implementations of proof-of-concept attacks against Zigbee networks, Thread networks, and other IEEE 802.15.4-based networks, which are made available for benign research purposes only.
 The users of these implementations are responsible for making sure that they are compliant with their local laws and that they have proper permission from the affected network owners.
 
 
 ## Implemented Attacks
 
-| Attack ID | Attack Description | Required Macros |
-| --------- | ------------------ | --------------- |
+| Attack ID | Attack Description[<sup>†</sup>](#dagger) | Required Macros |
+| --------- | ----------------------------------------- | --------------- |
 | 00 | Ignore RX\_START interrupts; equivalent to the original ATUSB firmware |  |
 | 01 | Jam only Network Update commands |  |
 | 02 | Spoof a MAC acknowledgment for each 12-byte Data Request of a specified network | PANID |
@@ -27,6 +27,21 @@ The users of these implementations are responsible for making sure that they are
 | 11 | Jam only 12-byte MAC commands of a specified network that request a MAC acknowledgment | PANID |
 | 12 | Jam only 12-byte MAC commands of a specified network that request a MAC acknowledgment and then spoof a MAC acknowledgment followed by a 127-byte NWK Data packet | PANID, SHORTDSTADDR, SHORTSRCADDR, FRAMECOUNTER, EXTENDEDSRCADDR, KEYSEQNUM |
 | 13 | Jam only certain 12-byte MAC commands of a specified network that request a MAC acknowledgment and then spoof a MAC acknowledgment followed by a 127-byte NWK Data packet, according to specified active and idle time intervals, with the active period restarting whenever a period of inactivity is observed and the idle period restarting whenever certain packet types are observed | PANID, SHORTDSTADDR, SHORTSRCADDR, FRAMECOUNTER, EXTENDEDSRCADDR, KEYSEQNUM, ACTIVESEC, IDLESEC |
+| 14 | Jam only 22-byte MAC commands of a specified network that request a MAC acknowledgment | PANID |
+| 15 | Jam only certain 22-byte MAC commands of a specified network that request a MAC acknowledgment and then spoof a MAC acknowledgment followed by a 127-byte MAC Data packet, according to specified active and idle time intervals, with the active period restarting whenever a period of inactivity is observed | PANID, SHORTDSTADDR, SHORTSRCADDR, FRAMECOUNTER, KEYINDEX, ACTIVESEC, IDLESEC |
+| 16 | Jam only certain 22-byte MAC commands of a specified network that request a MAC acknowledgment and then spoof a MAC acknowledgment followed by a 127-byte MLE command, according to specified active and idle time intervals, with the active period restarting whenever a period of inactivity is observed | PANID, EXTENDEDDSTADDR, EXTENDEDSRCADDR, UDPCHECKSUM, FRAMECOUNTER, KEYSOURCE, KEYINDEX, ACTIVESEC, IDLESEC |
+| 17 | Jam only certain 22-byte MAC commands of a specified network that request a MAC acknowledgment and then spoof a MAC acknowledgment followed by a 124-byte first fragment, according to specified active and idle time intervals, with the active period restarting whenever a period of inactivity is observed | PANID, EXTENDEDDSTADDR, EXTENDEDSRCADDR, DATAGRAMTAG, ACTIVESEC, IDLESEC |
+| 18 | Jam only certain 22-byte MAC commands of a specified network that request a MAC acknowledgment and then spoof a MAC acknowledgment followed by a 124-byte subsequent fragment, according to specified active and idle time intervals, with the active period restarting whenever a period of inactivity is observed | PANID, EXTENDEDDSTADDR, EXTENDEDSRCADDR, DATAGRAMTAG, ACTIVESEC, IDLESEC |
+| 19 | Jam only beacons of a specified network, each of which is at least 45 bytes in length | PANID |
+| 20 | Jam only Discovery Responses of a specified network | PANID |
+| 21 | Jam only beacons of a specified network, each of which is at least 45 bytes in length, and Discovery Responses of the same network | PANID |
+| 22 | Jam only beacons of a specified network, each of which is at least 45 bytes in length, unless the MAC source address corresponds to the specified extended address | PANID, EXTENDEDSRCADDR |
+| 23 | Jam only Discovery Responses of a specified network, unless the MAC source address corresponds to the specified extended address | PANID, EXTENDEDSRCADDR |
+| 24 | Jam only beacons of a specified network, each of which is at least 45 bytes in length, and Discovery Responses of the same network, unless the MAC source address corresponds to the specified extended address | PANID, EXTENDEDSRCADDR |
+| 25 | Jam only 124-byte unsecured 6LoWPAN first fragments of a specified network that use the specified UDP source and destination ports, unless the MAC addresses correspond to the specified extended addresses in either direction | PANID, EXTENDEDDSTADDR, EXTENDEDSRCADDR, UDPSRCPORT, UDPDSTPORT |
+| 26 | Jam only 124-byte unsecured 6LoWPAN first fragments of a specified network that use the specified UDP source and destination ports, unless the MAC addresses correspond to the specified extended addresses in either direction, and then spoof a MAC acknowledgment | PANID, EXTENDEDDSTADDR, EXTENDEDSRCADDR, UDPSRCPORT, UDPDSTPORT |
+
+<a name="dagger"><sup>†</sup></a>For more information, please refer to the source code files in the `fw/attacks` folder.
 
 
 ## Instructions
@@ -151,7 +166,7 @@ Copyright 2007 S. Salewski\
 Copyright 2008-2011, 2013-2015 Werner Almesberger\
 Copyright 2015-2016 Stefan Schmidt\
 Copyright 2017 Josef Filzmaier\
-Copyright 2020-2021 Dimitrios-Georgios Akestoridis
+Copyright 2020-2022 Dimitrios-Georgios Akestoridis
 
 This repository includes modified source code from the [ben-wpan repository](http://projects.qi-hardware.com/index.php/p/ben-wpan/).
 More specifically, the initial commit of this repository includes a copy of the [atusb/fw folder](http://projects.qi-hardware.com/index.php/p/ben-wpan/source/tree/805db6ebf5d80692158acadf88e239da9d3e67af/atusb/fw) from commit 805db6ebf5d80692158acadf88e239da9d3e67af of the ben-wpan repository.

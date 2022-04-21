@@ -4,8 +4,8 @@
 # Written 2010-2011, 2013 by Werner Almesberger
 # Copyright 2010-2011, 2013 by Werner Almesberger
 #
-# Modified 2020-2021 by Dimitrios-Georgios Akestoridis
-# Copyright 2020-2021 Dimitrios-Georgios Akestoridis
+# Modified 2020-2022 by Dimitrios-Georgios Akestoridis
+# Copyright 2020-2022 Dimitrios-Georgios Akestoridis
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -109,6 +109,34 @@ endif
 
 ifdef IDLESEC
 CFLAGS += -DIDLESEC=$(IDLESEC)
+endif
+
+ifdef KEYINDEX
+CFLAGS += -DKEYINDEX=$(KEYINDEX)
+endif
+
+ifdef EXTENDEDDSTADDR
+CFLAGS += -DEXTENDEDDSTADDR=$(EXTENDEDDSTADDR)
+endif
+
+ifdef UDPCHECKSUM
+CFLAGS += -DUDPCHECKSUM=$(UDPCHECKSUM)
+endif
+
+ifdef KEYSOURCE
+CFLAGS += -DKEYSOURCE=$(KEYSOURCE)
+endif
+
+ifdef DATAGRAMTAG
+CFLAGS += -DDATAGRAMTAG=$(DATAGRAMTAG)
+endif
+
+ifdef UDPSRCPORT
+CFLAGS += -DUDPSRCPORT=$(UDPSRCPORT)
+endif
+
+ifdef UDPDSTPORT
+CFLAGS += -DUDPDSTPORT=$(UDPDSTPORT)
 endif
 
 
@@ -283,13 +311,14 @@ disclaimer:
 		@echo "#                     DISCLAIMER                     #"
 		@echo "#                                                    #"
 		@echo "# This repository contains implementations of        #"
-		@echo "# proof-of-concept attacks against Zigbee networks   #"
-		@echo "# and other IEEE 802.15.4-based networks, which are  #"
-		@echo "# made available for benign research purposes only.  #"
-		@echo "# The users of these implementations are responsible #"
-		@echo "# for making sure that they are compliant with their #"
-		@echo "# local laws and that they have proper permission    #"
-		@echo "# from the affected network owners.                  #"
+		@echo "# proof-of-concept attacks against Zigbee networks,  #"
+		@echo "# Thread networks, and other IEEE 802.15.4-based     #"
+		@echo "# networks, which are made available for benign      #"
+		@echo "# research purposes only. The users of these         #"
+		@echo "# implementations are responsible for making sure    #"
+		@echo "# that they are compliant with their local laws and  #"
+		@echo "# that they have proper permission from the affected #"
+		@echo "# network owners.                                    #"
 		@echo "######################################################"
 		@echo -n "Are you sure that you want to proceed? [y/N] " \
 		  && read answer && [ $${answer:-N} = "y" ]
