@@ -111,7 +111,9 @@ $ make clean
 $ sudo make dfu ATTACKID=01
 ```
 
-After compiling and flashing the firmware image, executing the following command should display the configuration of the ATUSB as an IEEE 802.15.4 interface, including its phyname (e.g., `phy1`) and its devname (e.g., `wpan0`).
+If the flashing process failed, unplug your ATUSB from your host machine and retry while the LED of your ATUSB is turned on immediately after plugging it into your host machine again.
+
+After successfully compiling and flashing the firmware image, executing the following command should display the configuration of the ATUSB as an IEEE 802.15.4 interface, including its phyname (e.g., `phy1`) and its devname (e.g., `wpan0`):
 ```console
 $ iwpan dev
 ```
@@ -147,17 +149,21 @@ $ make clean
 $ make ATTACKID=01
 ```
 
-The attack with ID 00 is equivalent to the original ATUSB firmware, which can be used to sniff IEEE 802.15.4 packets with the same sequence of commands as the other attacks and `tcpdump` to store them in a PCAP file.
+The attack with ID 00 is equivalent to the original ATUSB firmware, which can be used to sniff IEEE 802.15.4 packets with the same sequence of commands as the other attacks and [`tcpdump`](https://www.tcpdump.org/) to store them in a pcap file.
 
 Whenever the user executes a compilation or flashing command, a disclaimer will be printed and they will have to accept responsibility for their actions in order to proceed.
 
 
-## Publications
+## Related Publications
 
-Some of these attacks were used in the following publications:
-
-* D.-G. Akestoridis and P. Tague, “HiveGuard: A network security monitoring architecture for Zigbee networks,” to appear in Proc. IEEE CNS’21.
+* D.-G. Akestoridis, V. Sekar, and P. Tague, “On the security of Thread networks: Experimentation with OpenThread-enabled devices,” to appear in Proc. ACM WiSec’22.
+* D.-G. Akestoridis and P. Tague, “HiveGuard: A network security monitoring architecture for Zigbee networks,” in *Proc. IEEE CNS’21*, 2021, pp. 209–217, doi: [10.1109/CNS53000.2021.9705043](https://doi.org/10.1109/CNS53000.2021.9705043).
 * D.-G. Akestoridis, M. Harishankar, M. Weber, and P. Tague, “Zigator: Analyzing the security of Zigbee-enabled smart homes,” in *Proc. ACM WiSec’20*, 2020, pp. 77–88, doi: [10.1145/3395351.3399363](https://doi.org/10.1145/3395351.3399363).
+
+
+## Acknowledgments
+
+This project was supported in part by the Carnegie Mellon CyLab Security and Privacy Institute and in part by Carnegie Mellon University.
 
 
 ## License
